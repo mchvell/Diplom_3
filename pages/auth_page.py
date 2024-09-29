@@ -16,15 +16,15 @@ class AuthPageHelper(BasePage):
     def fill_auth_form(self, **kwargs):
         for field, value in kwargs.items():
             locator = self.input_locators.get(field)
-            self.find_element(locator, 10).send_keys(value)
+            self.fill_field(locator, value)
         return self
 
     @allure.step("Нажать на кнопку входа")
     def click_enter_button(self):
-        self.find_element(self.enter_button_locator, 15).click()
+        self.click_element(self.enter_button_locator)
 
     @allure.step("Нажать на 'Забыл пароль'")
     def click_link(self, link_name):
         link_locator = self.link_locators.get(link_name)
-        return self.find_element(link_locator, 15).click()
+        return  self.click_element(link_locator)
 

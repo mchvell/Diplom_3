@@ -33,17 +33,4 @@ class UserData:
             "password": password
         }
 
-    @allure.step("Создаем нового пользователя")
-    def create_user(self):
-        user_credentials = self.generate_user_credentials()
-        response = requests.post(url=self.auth_url, data=user_credentials)
-        jwt = response.json().get("accessToken")
-        return user_credentials, jwt
 
-    @allure.step("Удаляем созданного пользователя")
-    def delete_user(self, jwt):
-        headers = {
-            "Authorization": jwt
-        }
-        response = requests.delete(url=self.delete_url, headers=headers)
-        response.raise_for_status()

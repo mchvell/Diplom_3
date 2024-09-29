@@ -15,11 +15,11 @@ class ProfilePageHelper(BasePage):
 
     @allure.step("Выйти из профиля")
     def click_on_exit_button(self):
-        return self.find_element(self.exit_button, 15).click()
+        return self.click_element(self.exit_button)
 
     @allure.step("Перейти в историю заказов")
     def click_on_order_history(self):
-        return self.find_element(self.order_feed, 15).click()
+        return self.click_element(self.order_feed)
 
     @allure.step("Получить список заказов пользователя")
     def get_attribute_order_feed(self):

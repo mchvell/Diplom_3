@@ -8,7 +8,7 @@ from pages.main_page import MainPageHelper
 
 
 class TestOrderFeed:
-    @allure.description("Проверка открытия модального окна с заказом")
+    @allure.title("Проверка открытия модального окна с заказом")
     @pytest.mark.parametrize("browser", ["chrome", "firefox"], indirect=True)
     def test_order_feed_modal_has_opened(self, browser):
         order_feed_page = OrderFeedHelper(browser)
@@ -16,7 +16,7 @@ class TestOrderFeed:
         order_feed_page.click_on_order(order_index=1)
         assert order_feed_page.is_modal_window_opened() is True
 
-    @allure.description("Проверка, что созданный заказ содержится в ленте заказов, и в истории заказов")
+    @allure.title("Проверка, что созданный заказ содержится в ленте заказов, и в истории заказов")
     @pytest.mark.parametrize("browser", ["chrome", "firefox"], indirect=True)
     def test_order_history_contains_in_order_feed(self, browser, authorization, create_burger):
         nav_bar = NavBarHelper(browser)
@@ -34,7 +34,7 @@ class TestOrderFeed:
         # хотя бы один заказ найден в списке всех заказов
         assert any(order in all_orders for order in user_orders)
 
-    @allure.description("Проверка, что созданный заказ увеличивает количество заказов")
+    @allure.title("Проверка, что созданный заказ увеличивает количество заказов")
     @pytest.mark.parametrize("browser", ["chrome", "firefox"], indirect=True)
     def test_increase_order_counter_for_all_time(self, browser, authorization, create_burger):
         order_no = create_burger
@@ -47,7 +47,7 @@ class TestOrderFeed:
         # больше или равно, тк другие пользователи тоже могут оформить заказы
         assert total_no >= order_no
 
-    @allure.description("Проверка, что созданный заказ увеличивает количество заказов сегодня")
+    @allure.title("Проверка, что созданный заказ увеличивает количество заказов сегодня")
     @pytest.mark.parametrize("browser", ["chrome", "firefox"], indirect=True)
     def test_increase_order_counter_for_today(self, browser, authorization):
         nav_bar = NavBarHelper(browser)
@@ -69,7 +69,7 @@ class TestOrderFeed:
 
         assert before_order < after_order
 
-    @allure.description("Проверка, что созданный заказ находится готовится")
+    @allure.title("Проверка, что созданный заказ находится готовится")
     @pytest.mark.parametrize("browser", ["chrome", "firefox"], indirect=True)
     def test_new_order_contains_in_progress_list(self, browser, authorization, create_burger):
         order_no = create_burger

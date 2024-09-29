@@ -17,31 +17,26 @@ class ResetPasswordHelper(BasePage):
         self.password_field_shown = ResetPasswordLocators.PASSWORD_FIELD_SHOWN
 
     @allure.step("Заполнить поле email")
-    def fill_email_field_form(self, email):
-        locator = self.find_element(self.email_field, 15)
-        locator.click()
-        locator.send_keys(email)
+    def fill_email_field(self, email):
+        self.fill_field(self.email_field, email)  # Используем общий метод
         return self
 
-    @allure.step("Нажать войти")
-    def click_enter_button(self):
-        self.find_element(self.reset_password_button, 15).click()
+    @allure.step("Раскрыть/скрыть пароль")
+    def click_on_restore_password_button(self):
+        self.click_element(self.reset_password_button)
 
     @allure.step("Получить текст поля с кодом")
     def get_enter_code_text(self):
-        locator = self.find_element(self.enter_code_field, 15)
-        return locator.text
+        return self.get_element_text(locator=self.enter_code_field)
 
     @allure.step("Заполнить поле пароль")
-    def fill_password_filed(self, password):
-        locator = self.find_element(self.password_field, 15)
-        locator.click()
-        locator.send_keys(password)
+    def fill_password(self, password):
+        self.fill_field(self.password_field, password)
         return self
 
     @allure.step("Раскрыть/скрыть пароль")
     def click_on_hide_password_button(self):
-        self.find_element(self.hide_password_button, 15).click()
+        self.click_element(self.hide_password_button)
 
     @allure.step("Получить состояние поле пароль")
     def get_password_field_state(self):
